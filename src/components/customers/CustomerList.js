@@ -5,6 +5,7 @@ import { API } from "../.."
 
 export const CustomerList = () => {
     const [customers, assignCustomers] = useState([])
+    const [totalCustomerMessage, updateMessage] = useState("")
 
     useEffect(
         () => {
@@ -19,8 +20,21 @@ export const CustomerList = () => {
         []
     )
 
+    useEffect(
+        () => {
+            if (customers.length === 1) {
+                updateMessage("You have 1 customer")
+            }
+            else {
+                updateMessage(`You have ${customers.length} customers`)
+            }
+        }, 
+        [customers]
+    )
+
     return (
         <>
+            <div>{totalCustomerMessage}</div>
             {
                 customers.map(
                     (customerObject) => { 

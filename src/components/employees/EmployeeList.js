@@ -3,6 +3,7 @@ import { API } from "../.."
 
 export const EmployeeList = () => {
     const [employees, assignEmployees] = useState([])
+    const [specialties, updateSpec] = useState("")
 
     useEffect(
         () => {
@@ -17,8 +18,19 @@ export const EmployeeList = () => {
         []
     )
 
+    useEffect(
+        () => {
+            const employSpec = employees.map(employee => employee.specialty)
+            updateSpec(employSpec.join(", "))
+        },
+        [employees]
+    )
+
     return (
         <>
+            <div>
+                Specialities: {specialties}
+            </div>
             {
                 employees.map(
                     (employeeObject) => {
